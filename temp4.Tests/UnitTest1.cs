@@ -9,10 +9,14 @@ namespace temp4.Tests
         {
         }
 
-        [Test]
-        public void Test1()
+
+        [TestCase("hello")]
+        [TestCase("mum")]
+        public void EchoEchoesValue(string value)
         {
-            Assert.Pass();
+            var sut = new Class1();
+            var actual = sut.Echo(value);
+            Assert.AreEqual(value, actual);
         }
     }
 }
