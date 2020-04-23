@@ -9,14 +9,36 @@ namespace temp4.Tests
         {
         }
 
-
-        [TestCase("hello")]
-        [TestCase("mum")]
-        public void EchoEchoesValue(string value)
+       
+        [Test]
+        public void Should_fill_the_board_with_single_character_gap()
         {
-            var sut = new Class1();
-            var actual = sut.Echo(value);
-            Assert.AreEqual(value, actual);
+
+            string[] initialBoard = new[] { "...", ". .", "..." };
+            string[] expectedBoard = new[] { "...", ".W.", "..." };
+
+            var dojo = new Dojo(initialBoard);
+
+            var result = dojo.Fill(1, 1, 'W');
+
+            Assert.AreEqual(expectedBoard, result);
         }
+
+        [Test]
+        public void Should_fill_the_board_with_double_character_gap()
+        {
+
+            string[] initialBoard = new[] { "....", ".  .", "...." };
+            string[] expectedBoard = new[] { "....", ".WW.", "...." };
+
+            var dojo = new Dojo(initialBoard);
+
+            var result = dojo.Fill(1, 1, 'W');
+
+            Assert.AreEqual(expectedBoard, result);
+        }
+
+
+
     }
 }
