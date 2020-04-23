@@ -38,6 +38,52 @@ namespace temp4.Tests
             Assert.AreEqual(expectedBoard, result);
         }
 
+        [Test]
+        public void Should_fill_the_board_with_full_row_character_gap()
+        {
+
+            string[] initialBoard = new[] { "....", "    ", "...." };
+
+            string[] expectedBoard = new[] { "....", "WWWW", "...." };
+
+            var dojo = new Dojo(initialBoard);
+
+            var result = dojo.Fill(1, 1, 'W');
+
+            Assert.AreEqual(expectedBoard, result);
+        }
+
+        [Test]
+        public void Should_fill_the_board_with_vertical_row_character_gap()
+        {
+
+            string[] initialBoard = new[] { " ...", " ...", "...." };
+
+            string[] expectedBoard = new[] { "W...", "W...", "...." };
+
+            var dojo = new Dojo(initialBoard);
+
+            var result = dojo.Fill(0, 0, 'W');
+
+            Assert.AreEqual(expectedBoard, result);
+        }
+
+
+        [Test]
+        public void Should_fill_the_board_with_two_vertical_row_character_gap()
+        {
+
+            string[] initialBoard = new[] { " .. ", " .. ", "...." };
+
+            string[] expectedBoard = new[] { "W...", "W...", "...." };
+
+            var dojo = new Dojo(initialBoard);
+
+            var result = dojo.Fill(0, 0, 'W');
+
+            Assert.AreEqual(expectedBoard, result);
+        }
+
 
 
     }

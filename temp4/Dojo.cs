@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using System.Text;
 
 namespace temp4
@@ -16,9 +17,14 @@ namespace temp4
 
         public string[] Fill(int x, int y, char fillCharacter)
         {
-            var row = _initialBoard[x];
-            
-            return new [] { _initialBoard[0], row.Replace(Convert.ToChar(" "),fillCharacter), _initialBoard[2] };
+            var returned = new string[_initialBoard.Length];
+
+            for (var i=0;i< _initialBoard.Length;i++)
+            {
+                returned[i] = _initialBoard[i].Replace(Convert.ToChar(" "), fillCharacter);
+            }
+
+            return returned;
         }
     }
 }
