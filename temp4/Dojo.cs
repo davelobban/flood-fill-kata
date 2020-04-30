@@ -1,30 +1,56 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-
-namespace temp4
+﻿namespace temp4
 {
     public class Dojo
     {
-        private string[] _initialBoard;
+        private readonly string[] _board;
+        private char _filler;
+        private char _cellToFill;
 
-        public Dojo(string[] initialBoard)
+        public Dojo(string[] board)
         {
-            _initialBoard = initialBoard;
+            _board = board;
         }
 
-        public string[] Fill(int x, int y, char fillCharacter)
+        public string[] Fill(int rowIndex, int colIndex, char filler)
         {
-            var returned = new string[_initialBoard.Length];
+            _filler = filler;
 
-            for (var i=0;i< _initialBoard.Length;i++)
+            _cellToFill = _board[rowIndex].ToCharArray()[colIndex];
+
+            FillAdjacentCells(rowIndex, colIndex);
+
+            return _board;
+        }
+
+        private void FillAdjacentCells(int rowIndex, int colIndex)
+        {
+            if (!IsCellEmpty(rowIndex, colIndex))
             {
-                returned[i] = _initialBoard[i].Replace(Convert.ToChar(" "), fillCharacter);
+                return;
             }
 
-            return returned;
+            ReplaceCellValue(rowIndex, colIndex);
+
+            FillAdjacentCells(rowIndex, colIndex + 1);
+            FillAdjacentCells(rowIndex, colIndex - 1);
+            FillAdjacentCells(rowIndex + 1, colIndex);
+            FillAdjacentCells(rowIndex - 1, colIndex);
+        }
+
+        private bool IsCellEmpty(int rowIndex, int colIndex)
+        {
+            return rowIndex < _board.Length
+                   && rowIndex > -1
+                   && colIndex < _board[rowIndex].Length
+                   && colIndex > -1
+                   && _board[rowIndex].ToCharArray()[colIndex] == _cellToFill;
+        }
+
+        private void ReplaceCellValue(int rowIndex, int colIndex)
+        {
+            var rowItems = _board[rowIndex].ToCharArray();
+            rowItems[colIndex] = _filler;
+            _board[rowIndex] = string.Join("", rowItems);
         }
     }
 }
