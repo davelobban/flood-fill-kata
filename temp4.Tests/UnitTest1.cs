@@ -74,5 +74,28 @@ namespace temp4.Tests
 
             Assert.AreEqual(expectedBoard, result);
         }
+
+        [Test]
+        public void Should_fill_empty_cells_in_multiple_rows_respecting_barrier()
+        {
+            var initialBoard = new[] { ".--------",
+                                       ".........",
+                                       "---------",
+                                       ".........",
+                                       ".--------",
+                                       "........-" };
+
+            var expectedBoard = new[] { "W--------",
+                                        "WWWWWWWWW",
+                                        "---------",
+                                       ".........",
+                                       ".--------",
+                                       "........-" };
+
+            var dojo = new Dojo(initialBoard);
+            var result = dojo.Fill(0, 0, 'W');
+
+            Assert.AreEqual(expectedBoard, result);
+        }
     }
 }
